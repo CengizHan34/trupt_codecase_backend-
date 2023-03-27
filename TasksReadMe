@@ -1,0 +1,32 @@
+
+
+Merhaba,
+Bu çalışma kapsamında sizden 3 başlık altında çeşitli geliştirmeler yapmanız beklenmekte.
+Bunlar;
+1- Talepler,
+2- Code Review,
+3- Bonus İstekler.
+
+1- Talepler:
+
+1.1 Yeni anlaşmaların premium sıfır olamaz.
+1.2 penaltyRate sıfır ve yüz arasında bir değerdir(Sıfır ve yüz dahil).
+1.3 Bütün agreement'lar için agreementTax içinde bulunan mantığı uygulayacak,
+agreementNo ve hesaplanan tutar şeklinde dönüş yapacak bir endpoint yazılması.
+1.4 Aynı anda hem agreement hem de agreementExtraCalc kayıt edecek bir endpoint yazılması.
+
+2- Code Review:
+
+Kodun gözden geçirilmesi ve SOLID prensipleri ve clean Code uygulamalarına uymayan sorunlu
+kısımların gözden geçirilmesi var ise veri ve obje yapısında bulunan tutarsızlıkların giderilmesi
+istenmektedir.
+
+3- Bonus İstekler:
+
+3.1- Gelen requestlerin loglanması istenmektedir,
+3.2- Bir yetki mekanizması oluşturulması, bu doğrultuda yetkili kullanıcıların
+yetki sahibi oldukları servisleri kullanabilmesinin sağlanması istenmektedir.
+
+Başarılar,
+
+
