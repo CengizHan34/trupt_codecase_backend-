@@ -2,11 +2,13 @@ package com.example.demo.agreement.dao;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@ToString
 public class Agreement {
 
     @Getter @Setter
@@ -19,7 +21,7 @@ public class Agreement {
     private String agreementNo;
 
     @Getter @Setter
-    @Column(name="premium")
+    @Column(name = "premium")
     private BigDecimal premium;
 
     @Getter @Setter

@@ -1,12 +1,13 @@
 package com.example.demo.api;
 
+import com.example.demo.payload.request.AgreementDto;
+import com.example.demo.payload.response.AgreementTaxDto;
 import com.example.demo.agreement.dao.Agreement;
 import com.example.demo.agreement.dao.AgreementExtraCalc;
-import com.example.demo.repository.AgreementExtraCalcRepository;
-import com.example.demo.repository.AgreementRepository;
 import com.example.demo.service.AgreementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -23,13 +24,13 @@ public class AgreementRestController {
         return agreementService.getAllAgreements();
     }
 
-    @GetMapping("/agreement")
-    public Agreement getAgreement(Long id) {
+    @GetMapping("/agreement/{id}")
+    public Agreement getAgreement(@PathVariable Long id) {
         return agreementService.getAgreementById(id);
     }
 
     @RequestMapping(path = "/newAgreement", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Long addNewAgreement(@RequestBody Agreement agreement){
+    public Long addNewAgreement(@RequestBody Agreement agreement) {
         return agreementService.addNewAgreement(agreement);
     }
 
@@ -39,27 +40,17 @@ public class AgreementRestController {
     }
 
     @RequestMapping(path = "/newAgreementExtraCalc", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public long addNewAgreementExtraCalc(@RequestBody AgreementExtraCalc agreementExtraCalc){
+    public long addNewAgreementExtraCalc(@RequestBody AgreementExtraCalc agreementExtraCalc) {
         return agreementService.addNewAgreementExtraCalc(agreementExtraCalc);
     }
 
-
     @GetMapping("/agreementTax")
-    public BigDecimal getAgreementTax(@RequestParam("id")  Long id) {
-        AgreementExtraCalc agreementExtraCalc = agreementService.getAgreementExtraCalc(id);
-
-        Agreement agreement= agreementService.getAgreementById(id);
-
-        BigDecimal taxAmount=BigDecimal.ZERO;
-
-        taxAmount=agreementExtraCalc.getTax().multiply(agreement.getPremium());
-
-        if(taxAmount.compareTo(BigDecimal.valueOf(1000))<1){
-            return taxAmount;
-        }else {
-            return taxAmount.subtract(BigDecimal.valueOf(500));
-        }
-
+    public AgreementTaxDto getAgreementTax(@RequestParam("id") Long id) {
+        return agreementService.getAgreementExtraCalc(id);
     }
-
+    @PostMapping("/agreementAndExtra")
+    public ResponseEntity saveAgreementAndExtra(@RequestBody AgreementDto agreementDto){
+        agreementService.saveAgreementAndAgreementExtraCalc(agreementDto);
+        return ResponseEntity.ok().build();
+    }
 }
